@@ -1,0 +1,180 @@
+:root {
+--dimension: 250px;
+--outline: calc(var(--dimension) / 3);
+--bg-color: #040012;
+--block-color: #bbbec5;
+--duration: 30s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.cube {
+  -webkit-perspective: calc(var(--dimension) + var(--outline));
+          perspective: calc(var(--dimension) + var(--outline));
+  -webkit-filter: drop-shadow(0 0 var(--outline) var(--block-color));
+          filter: drop-shadow(0 0 var(--outline) var(--block-color));
+}
+
+.cube,
+.cube div,
+.cube div span {
+  width: var(--dimension);
+  height: var(--dimension);
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+
+.cube div {
+  position: relative;
+  -webkit-transform: translate3d(0, -50%, calc(var(--dimension) * -2)) rotateX(90deg) rotateZ(0deg);
+          transform: translate3d(0, -50%, calc(var(--dimension) * -2)) rotateX(90deg) rotateZ(0deg);
+  -webkit-animation: cube var(--duration) 0s linear infinite;
+          animation: cube var(--duration) 0s linear infinite;
+}
+
+@-webkit-keyframes cube {
+  100% {
+    -webkit-transform: translate3d(0, -50%, calc(var(--dimension) * -2)) rotateX(90deg) rotateZ(360deg);
+            transform: translate3d(0, -50%, calc(var(--dimension) * -2)) rotateX(90deg) rotateZ(360deg);
+  }
+}
+
+@keyframes cube {
+  100% {
+    -webkit-transform: translate3d(0, -50%, calc(var(--dimension) * -2)) rotateX(90deg) rotateZ(360deg);
+            transform: translate3d(0, -50%, calc(var(--dimension) * -2)) rotateX(90deg) rotateZ(360deg);
+  }
+}
+
+.cube div span {
+  position: absolute;
+}
+
+.cube div span:nth-child(even) {
+  outline: var(--outline) solid var(--block-color);
+  z-index: 0;
+}
+
+.cube div span:nth-child(odd) {
+  outline: var(--outline) solid #a6a9af;
+  z-index: -1;
+}
+
+.cube div span:nth-child(1), .cube div span:nth-child(2) {
+  -webkit-transform-origin: bottom center;
+          transform-origin: bottom center;
+  -webkit-transform: rotateX(90deg) translateZ(calc(var(--outline) *  -1));
+          transform: rotateX(90deg) translateZ(calc(var(--outline) *  -1));
+}
+
+.cube div span:nth-child(2) {
+  -webkit-transform: rotateX(90deg) translateZ(0);
+          transform: rotateX(90deg) translateZ(0);
+}
+
+.cube div span:nth-child(3) {
+  -webkit-transform: translateZ(var(--outline));
+          transform: translateZ(var(--outline));
+}
+
+.cube div span:nth-child(4) {
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+}
+
+.cube div span:nth-child(5) {
+  -webkit-transform: translateZ(calc((var(--dimension) + var(--outline)) * -1));
+          transform: translateZ(calc((var(--dimension) + var(--outline)) * -1));
+}
+
+.cube div span:nth-child(6) {
+  -webkit-transform: translateZ(calc(var(--dimension) * -1));
+          transform: translateZ(calc(var(--dimension) * -1));
+}
+
+.cube div span:nth-child(7), .cube div span:nth-child(8) {
+  -webkit-transform-origin: right center;
+          transform-origin: right center;
+  -webkit-transform: rotateY(-90deg) translateZ(calc(var(--outline) *  -1));
+          transform: rotateY(-90deg) translateZ(calc(var(--outline) *  -1));
+}
+
+.cube div span:nth-child(8) {
+  -webkit-transform: rotateY(-90deg) translateZ(0);
+          transform: rotateY(-90deg) translateZ(0);
+}
+
+.cube div span:nth-child(9), .cube div span:nth-child(10) {
+  -webkit-transform-origin: left center;
+          transform-origin: left center;
+  -webkit-transform: rotateY(90deg) translateZ(calc(var(--outline) *  -1));
+          transform: rotateY(90deg) translateZ(calc(var(--outline) *  -1));
+}
+
+.cube div span:nth-child(10) {
+  -webkit-transform: rotateY(90deg) translateZ(0);
+          transform: rotateY(90deg) translateZ(0);
+}
+
+.cube div span:nth-child(11), .cube div span:nth-child(12) {
+  -webkit-transform-origin: top center;
+          transform-origin: top center;
+  -webkit-transform: rotateX(-90deg) translateZ(calc(var(--outline) *  -1));
+          transform: rotateX(-90deg) translateZ(calc(var(--outline) *  -1));
+}
+
+.cube div span:nth-child(12) {
+  -webkit-transform: rotateX(-90deg) translateZ(0);
+          transform: rotateX(-90deg) translateZ(0);
+}
+
+.cube div::after {
+  content: "";
+  display: block;
+  width: calc(var(--dimension) / 2);
+  height: calc(var(--dimension) / 2);
+  background-image: radial-gradient(62.5px, white, var(--block-color));
+  border-radius: 50%;
+  -webkit-box-shadow: 0 0 5px 5px var(--block-color), 0 0 10px 10px var(--block-color), 0 0 15px 15px var(--block-color), 0 0 20px 20px var(--block-color);
+          box-shadow: 0 0 5px 5px var(--block-color), 0 0 10px 10px var(--block-color), 0 0 15px 15px var(--block-color), 0 0 20px 20px var(--block-color);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, -50%,  calc(var(--dimension) / -2)) rotateX(90deg) rotateY(0deg);
+          transform: translate3d(-50%, -50%,  calc(var(--dimension) / -2)) rotateX(90deg) rotateY(0deg);
+  -webkit-animation: light var(--duration) 0s linear infinite;
+          animation: light var(--duration) 0s linear infinite;
+}
+
+@-webkit-keyframes light {
+  100% {
+    -webkit-transform: translate3d(-50%, -50%,  calc(var(--dimension) / -2)) rotateX(90deg) rotateY(-360deg);
+            transform: translate3d(-50%, -50%,  calc(var(--dimension) / -2)) rotateX(90deg) rotateY(-360deg);
+  }
+}
+
+@keyframes light {
+  100% {
+    -webkit-transform: translate3d(-50%, -50%,  calc(var(--dimension) / -2)) rotateX(90deg) rotateY(-360deg);
+            transform: translate3d(-50%, -50%,  calc(var(--dimension) / -2)) rotateX(90deg) rotateY(-360deg);
+  }
+}

@@ -1,0 +1,119 @@
+$dimension: 250px;
+$outline: ($dimension / 3);
+$bg-color: #040012;
+$block-color: #bbbec5;
+$duration: 30s;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $bg-color;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cube {
+  perspective: ($dimension + $outline);
+  filter: drop-shadow(0 0 ($dimension / 3) $block-color);
+  &,
+  & div,
+  & div span {
+    width: $dimension;
+    height: $dimension;
+    transform-style: preserve-3d;
+  }
+  div {
+    position: relative;
+    transform: translate3d(0, -50%, -($dimension * 2)) rotateX(90deg) rotateZ(0deg);
+    animation: cube $duration 0s linear infinite;
+
+    @keyframes cube {
+      100% {
+        transform: translate3d(0, -50%, -($dimension * 2)) rotateX(90deg) rotateZ(360deg);
+      }
+    }
+
+    span {
+      position: absolute;
+
+      &:nth-child(even) {
+        outline: $outline solid $block-color;
+        z-index: 0;
+      }
+      &:nth-child(odd) {
+        outline: $outline solid ($block-color / 1.125);
+        z-index: -1;
+      }
+      &:nth-child(1),
+      &:nth-child(2) {
+        transform-origin: bottom center;
+        transform: rotateX(90deg) translateZ(-$outline);
+      }
+      &:nth-child(2) {
+        transform: rotateX(90deg) translateZ(0);
+      }
+      &:nth-child(3) {
+        transform: translateZ($outline);
+      }
+      &:nth-child(4) {
+        transform: translateZ(0);
+      }
+      &:nth-child(5) {
+        transform: translateZ(-$dimension - $outline);
+      }
+      &:nth-child(6) {
+        transform: translateZ(-$dimension);
+      }
+      &:nth-child(7),
+      &:nth-child(8) {
+        transform-origin: right center;
+        transform: rotateY(-90deg) translateZ(-$outline);
+      }
+      &:nth-child(8) {
+        transform: rotateY(-90deg) translateZ(0);
+      }
+      &:nth-child(9),
+      &:nth-child(10) {
+        transform-origin: left center;
+        transform: rotateY(90deg) translateZ(-$outline);
+      }
+      &:nth-child(10) {
+        transform: rotateY(90deg) translateZ(0);
+      }
+      &:nth-child(11),
+      &:nth-child(12) {
+        transform-origin: top center;
+        transform: rotateX(-90deg) translateZ(-$outline);
+      }
+      &:nth-child(12) {
+        transform: rotateX(-90deg) translateZ(0);
+      }
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      width: ($dimension / 2);
+      height: ($dimension / 2);
+      background-image: radial-gradient(($dimension / 4), white, $block-color);
+      border-radius: 50%;
+      box-shadow: 0 0 5px 5px $block-color, 0 0 10px 10px $block-color, 0 0 15px 15px $block-color, 0 0 20px 20px $block-color;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%, -50%, -($dimension / 2)) rotateX(90deg) rotateY(0deg);
+      animation: light $duration 0s linear infinite;
+    }
+    @keyframes light {
+      100% {
+        transform: translate3d(-50%, -50%, -($dimension / 2)) rotateX(90deg) rotateY(-360deg);
+      }
+    }
+  }
+}
