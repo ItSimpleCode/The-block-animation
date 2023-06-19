@@ -4,6 +4,5 @@ use css file or scss file, it sames thing.
 #
 if you want my services:
 - gmail: elqayedycontact@gmail.com
-- instagram: @itsimplecode for code.
+- instagram: @itsimplecode.
 - facebook: @itsimplecode
-- twitter: null
